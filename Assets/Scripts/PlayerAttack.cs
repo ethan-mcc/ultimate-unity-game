@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using Minifantasy;
+using TMPro;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -14,11 +15,22 @@ public class PlayerAttack : MonoBehaviour
     public GameObject attackHitbox;
     public int enemDestroy;
 
+    //Kaden Blanch
+    //TODO: FIX SCORE TEXT
+    /*update player score in ui
+    public TextMeshProUGUI ScoreText;
+    public int score;
+    */
+
     private void Start()
     {
         setAnim = gameObject.GetComponent<SetAnimatorParameter>();
         rb = gameObject.GetComponent<Rigidbody2D>();
 
+        //score ui
+        //score = 0;
+        //TODO: FIX SCORE TEXT
+        //ScoreText.text
     }
 
     // Update is called once per frame
