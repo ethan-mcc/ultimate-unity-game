@@ -35,9 +35,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate()
-    {        
-        // Set the velocity to the normalized movement * speed * fixed delta time
-        rb.velocity = movement.normalized * moveSpeed * Time.fixedDeltaTime;
+    {
+        // Necolai McIntosh - Stop player completely while attacking
+        if (setAnim.parameterName != "Attack" && setAnim.parameterName != "ChargedAttack")
+        {
+            // Set the velocity to the normalized movement * speed * fixed delta time
+            rb.velocity = movement.normalized * moveSpeed * Time.fixedDeltaTime;
+        }
 
         // Flip the player based on their horizontal direction
         // Kevin - Fixed to face the correct direction

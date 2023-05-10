@@ -36,17 +36,16 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.magnitude == 0)
+        // Necolai McIntosh - The player does not need to stop moving in order to attack
+        // (Note: I did not write the code below, I just removed the condition that
+        //  prevents the player from initiating an attack while moving)
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                ChargedAttack();
-            }
-            else if (Input.GetKey(KeyCode.Space))
-            {
-                Attack();
-            }
-            
+            ChargedAttack();
+        }
+        else if (Input.GetKey(KeyCode.Space))
+        {
+            Attack();
         }
     }
 
@@ -54,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
     {
         // Stop player completely and perform attack animation
         setAnim.TurnOffCurrentParameter();
-        rb.velocity = new Vector2(0, 0);
+        rb.velocity = Vector2.zero;
         setAnim.ToggleAnimatorParameter("Attack");
 
         // Activates hitbox that destroys enemies
@@ -64,11 +63,11 @@ public class PlayerAttack : MonoBehaviour
     {
         // Stop player completely and perform charged attack animation
         setAnim.TurnOffCurrentParameter();
-        rb.velocity = new Vector2(0, 0);
+        rb.velocity = Vector2.zero;
         setAnim.ToggleAnimatorParameter("ChargedAttack");
 
+        // Activates hitbox that destroys enemies
         Invoke("attackHitboxActive", 1.5f);
-
     }
 
 
