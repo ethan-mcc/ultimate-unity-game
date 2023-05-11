@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
 
     public GameObject attackHitbox;
     public int enemDestroy;
-
+    private bool isStart = false;
     //Kaden Blanch
     //TODO: FIX SCORE TEXT
     /*update player score in ui
@@ -36,14 +36,18 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            isStart = true;
+        }
         // Necolai McIntosh - The player does not need to stop moving in order to attack
         // (Note: I did not write the code below, I just removed the condition that
         //  prevents the player from initiating an attack while moving)
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && isStart)
         {
             ChargedAttack();
         }
-        else if (Input.GetKey(KeyCode.Space))
+        else if (Input.GetKey(KeyCode.Space) && isStart)
         {
             Attack();
         }
