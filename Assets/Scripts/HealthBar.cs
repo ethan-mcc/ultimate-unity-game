@@ -7,6 +7,8 @@ public class HealthBar : MonoBehaviour
 {
     private RectTransform bar;
     private Image barImage;
+    // a reference to the health bar - Thaddeus Reimer
+    public Health health;
 
     // Start is called before the first frame update
     void Start()
@@ -14,11 +16,11 @@ public class HealthBar : MonoBehaviour
         // Setting the health bar correctly - Aidan McClaughrey
         bar = GetComponent<RectTransform>();
         barImage = GetComponent<Image>();
-        if (Health.totalHealth < 0.3f)
+        if (health.totalHealth < 0.3f)
         {
             barImage.color = Color.red;
         }
-        SetSize(Health.totalHealth);
+        SetSize();
     }
     // Update is called once per frame
     void Update()
@@ -28,25 +30,30 @@ public class HealthBar : MonoBehaviour
     // Caculates the damage taken and applies it to the bar - Aidan McClaughrey
     public void Damage(float damage)
     {
-        if ((Health.totalHealth -= damage) >= 0f)
+        if ((health.totalHealth - damage) > 0f)
         {
-            Health.totalHealth -= damage;
+            health.totalHealth -= damage;
         }
         else
         {
-            Health.totalHealth = 0f;
+            // game should quit when health is 0, doesn't work in editor for some reason - Thaddeus Reimer
+            Debug.Log("dead");
+            health.totalHealth = 0f;
+            Application.Quit();
         }
 
-        if (Health.totalHealth < 0.3f)
+        if (health.totalHealth < 0.3f)
         {
             barImage.color = Color.red;
         }
 
-        SetSize(Health.totalHealth);
+        Debug.Log(health.totalHealth);
+
+        SetSize();
     }
     // Sets how much health the player has - Aidan McClaughrey
-    public void SetSize(float size)
+    public void SetSize()
     {
-        bar.localScale = new Vector3(size, 1f);
+        bar.sizeDelta = new Vector2(90 * health.totalHealth, bar.sizeDelta.y);
     }
 }

@@ -5,5 +5,5 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     // Total health for the player - Aidan McClaughrey
-    public static float totalHealth = 1f;
+    public float totalHealth = 1f;
 }

@@ -18,11 +18,11 @@ public class Collisions : MonoBehaviour
 
     }
     // When the player collides with anything tagged with enemy - Aidan McClaughrey
-    private void OnTriggerStay2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
-            healthBar.Damage(0.002f);
+            healthBar.Damage(0.2f);
         }
     }
 }
